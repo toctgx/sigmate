@@ -3,114 +3,314 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Singmate Final Screen Structure v1</title>
+    <title>Singmate UI Preview</title>
     <style>
-      body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(180deg,#fff8fb 0%,#f7f9ff 100%); color:#111827; }
-      .wrap { max-width: 980px; margin: 0 auto; padding: 40px 20px 80px; }
-      .hero { background:linear-gradient(180deg,#ffffff 0%,#fff7fb 100%); border:1px solid #f3dce7; border-radius:24px; padding:28px; box-shadow:0 14px 30px rgba(227,120,162,.10); margin-bottom:20px; }
-      h1 { margin:0 0 10px; font-size:40px; }
-      h2 { margin:32px 0 12px; font-size:28px; }
-      h3 { margin:18px 0 8px; font-size:20px; }
-      p, li { line-height:1.7; color:#374151; }
-      .card { background:#ffffff; border:1px solid #f2e6ee; border-radius:24px; padding:24px; margin-bottom:18px; box-shadow:0 12px 24px rgba(227,120,162,.08); }
-      .tag { display:inline-block; background:#ffe8f1; color:#b83280; padding:8px 12px; border-radius:999px; font-weight:700; margin:4px 8px 0 0; font-size:14px; }
-      pre { background:#0f172a; color:#e5e7eb; padding:18px; border-radius:18px; overflow:auto; font-size:14px; line-height:1.55; }
-      ul { padding-left: 20px; }
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #2f176f;
+        color: #fff;
+      }
+      .page {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 36px 18px 80px;
+      }
+      .hero {
+        margin-bottom: 24px;
+      }
+      .hero small {
+        color: #d7ff63;
+        letter-spacing: 0.24em;
+        font-weight: 800;
+      }
+      .hero h1 {
+        margin: 8px 0 10px;
+        font-size: 72px;
+        line-height: 0.92;
+        letter-spacing: -0.08em;
+      }
+      .hero p {
+        margin: 0;
+        font-size: 18px;
+        color: rgba(255,255,255,0.78);
+      }
+      .screens {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+        gap: 20px;
+        align-items: start;
+      }
+      .phone {
+        position: relative;
+        overflow: hidden;
+        min-height: 860px;
+        border-radius: 38px;
+        background: #4c2a99;
+        padding: 22px 18px 110px;
+        box-shadow: 0 28px 50px rgba(10, 4, 28, 0.38);
+      }
+      .phone.short { min-height: 820px; }
+      .shape { position: absolute; z-index: 0; }
+      .circle { border-radius: 50%; background: #d7ff63; }
+      .blob { width: 124px; height: 84px; background: #b792ff; border-radius: 50px; }
+      .squiggle { width: 116px; height: 64px; background: #ff4e7a; border-radius: 36px; box-shadow: 48px 0 0 #ff4e7a; }
+      .star { width: 110px; height: 110px; background: #ff4e7a; clip-path: polygon(50% 0%, 62% 35%, 100% 50%, 62% 65%, 50% 100%, 38% 65%, 0% 50%, 38% 35%); }
+      .tri { width: 0; height: 0; border-left: 42px solid transparent; border-right: 42px solid transparent; border-bottom: 72px solid #d7ff63; }
+      .content { position: relative; z-index: 1; }
+      .screen-label {
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        color: #d7ff63;
+        margin-bottom: 14px;
+      }
+      .status {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+      .big-title {
+        font-size: 46px;
+        line-height: 0.92;
+        letter-spacing: -0.07em;
+        font-weight: 800;
+        margin: 10px 0 18px;
+      }
+      .subtext { color: rgba(255,255,255,0.8); font-size: 15px; line-height: 1.5; }
+      .card {
+        position: relative;
+        background: rgba(83, 49, 165, 0.92);
+        border-radius: 34px;
+        padding: 18px;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+        backdrop-filter: blur(8px);
+      }
+      .photos {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 12px;
+        margin-top: -94px;
+        margin-bottom: 18px;
+      }
+      .photo {
+        width: 126px;
+        height: 170px;
+        border-radius: 30px;
+        background-size: cover;
+        background-position: center;
+        box-shadow: 0 18px 30px rgba(0,0,0,0.22);
+      }
+      .photo.left { transform: rotate(-10deg); background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80'); }
+      .photo.right { transform: rotate(10deg); background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80'); }
+      .title { font-size: 24px; line-height: 1.05; text-align: center; letter-spacing: -0.06em; font-weight: 700; margin: 0 0 8px; }
+      .title span { color: #d7ff63; }
+      .subtitle { text-align: center; color: rgba(255,255,255,0.82); margin: 0 0 16px; font-size: 15px; }
+      .panel {
+        background: rgba(255,255,255,0.06);
+        border-radius: 26px;
+        padding: 18px;
+      }
+      .row { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+      .row h2, .row h3 { margin: 0; letter-spacing: -0.05em; }
+      .row h2 { font-size: 30px; }
+      .meta { color: rgba(255,255,255,0.72); font-size: 14px; }
+      .chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+      .chip { border-radius: 999px; padding: 8px 12px; background: rgba(255,255,255,0.1); font-size: 13px; font-weight: 700; }
+      .preview {
+        display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        background: #5e37b0; border-radius: 999px; padding: 12px 14px 12px 18px; margin-bottom: 14px;
+      }
+      .preview strong { display: block; font-size: 15px; margin-bottom: 3px; }
+      .preview span { color: rgba(255,255,255,0.68); font-size: 11px; }
+      .play {
+        width: 54px; height: 54px; border: none; border-radius: 50%; background: #d7ff63; color: #4c2a99; font-size: 20px; font-weight: 800;
+      }
+      .actions { display: grid; grid-template-columns: 62px 1fr 1fr; gap: 10px; }
+      .actions button, .inputbar button, .coin-btn, .battle-btn, .list-btn {
+        border: none; border-radius: 999px; font-weight: 800;
+      }
+      .pass { background: rgba(255,255,255,0.12); color: #fff; min-height: 54px; }
+      .mate { background: #ffffff; color: #4c2a99; min-height: 54px; }
+      .battle { background: #ff4e7a; color: #fff; min-height: 54px; }
+      .section-title { font-size: 30px; letter-spacing: -0.06em; margin: 18px 0 10px; }
+      .chat-header, .map-card, .mypage-card { background: rgba(255,255,255,0.08); border-radius: 26px; padding: 18px; }
+      .bubble-wrap { display: grid; gap: 10px; margin: 18px 0; }
+      .bubble { max-width: 78%; padding: 14px 16px; border-radius: 24px; font-size: 14px; line-height: 1.45; }
+      .bubble.me { margin-left: auto; background: #d7ff63; color: #3f2392; }
+      .bubble.you { background: rgba(255,255,255,0.12); }
+      .inputbar { display: grid; grid-template-columns: 1fr 56px; gap: 10px; margin-top: 16px; }
+      .inputbar div { background: #5e37b0; border-radius: 999px; padding: 16px 18px; color: rgba(255,255,255,0.74); }
+      .inputbar button { background: #ff4e7a; color: #fff; font-size: 18px; }
+      .battle-card { background: #5e37b0; border-radius: 28px; padding: 18px; margin-top: 14px; }
+      .battle-options { display: grid; gap: 10px; margin-top: 12px; }
+      .battle-btn { min-height: 50px; background: rgba(255,255,255,0.12); color: #fff; }
+      .battle-btn.primary { background: #d7ff63; color: #4c2a99; }
+      .map-box { height: 210px; border-radius: 28px; background: linear-gradient(135deg, #d7ff63 0%, #b792ff 100%); margin-bottom: 14px; position: relative; overflow: hidden; }
+      .pin { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #ff4e7a; box-shadow: 0 0 0 8px rgba(255,255,255,0.22); }
+      .p1 { top: 32%; left: 30%; } .p2 { top: 48%; left: 60%; } .p3 { top: 62%; left: 42%; }
+      .location-item, .mypage-item { background: rgba(255,255,255,0.08); border-radius: 22px; padding: 16px; margin-top: 12px; }
+      .location-item h3, .mypage-item h3 { margin: 0 0 6px; font-size: 20px; letter-spacing: -0.04em; }
+      .list-actions { display: flex; gap: 8px; margin-top: 12px; }
+      .list-btn { background: #fff; color: #4c2a99; padding: 12px 14px; }
+      .list-btn.share { background: #d7ff63; }
+      .profile-top { text-align: center; margin-bottom: 16px; }
+      .avatar { width: 92px; height: 92px; border-radius: 50%; background: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80') center/cover; margin: 0 auto 12px; box-shadow: 0 10px 24px rgba(0,0,0,0.28); }
+      .coin-box { background: #d7ff63; color: #4c2a99; border-radius: 24px; padding: 16px; margin-top: 12px; }
+      .coin-btn { background: #4c2a99; color: #fff; padding: 12px 14px; margin-top: 10px; }
+      .nav {
+        position: absolute; left: 16px; right: 16px; bottom: 16px; background: rgba(82, 48, 163, 0.96); border-radius: 999px; padding: 12px 10px;
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; box-shadow: 0 18px 32px rgba(19, 7, 51, 0.3);
+      }
+      .nav button { border: none; background: transparent; color: rgba(255,255,255,0.72); display: grid; justify-items: center; gap: 4px; font-size: 11px; font-weight: 700; }
+      .nav .active { color: #d7ff63; }
+      .login-card { margin-top: 200px; }
+      .auth-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+      .auth-toggle div, .field, .social { border-radius: 999px; padding: 14px 16px; }
+      .auth-toggle .on { background: #d7ff63; color: #4c2a99; font-weight: 800; }
+      .auth-toggle .off { background: rgba(255,255,255,0.1); }
+      .social { background: #fff; color: #4c2a99; font-weight: 800; margin-bottom: 10px; text-align: center; }
+      .field { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.72); margin-bottom: 10px; }
+      .submit { background: #ff4e7a; color: #fff; text-align: center; border-radius: 999px; padding: 16px; font-weight: 800; margin-top: 8px; }
     </style>
   </head>
   <body>
-    <div class="wrap">
+    <div class="page">
       <section class="hero">
-        <h1>Singmate Final Screen Structure v1</h1>
-        <p>코인노래방 함께 갈 친구를 찾는 위치 기반 앱의 최종 화면 구조 확정본입니다.</p>
-        <div>
-          <span class="tag">홈</span>
-          <span class="tag">채팅</span>
-          <span class="tag">주변 코인노래방</span>
-          <span class="tag">마이페이지</span>
-          <span class="tag">15초 미리듣기</span>
-          <span class="tag">싱메이트</span>
-          <span class="tag">싱배틀</span>
-        </div>
+        <small>SINGMATE UI SYSTEM</small>
+        <h1>dateasy-inspired<br/>singmate screens</h1>
+        <p>보라 중심 배경, 라임 포인트, 굵은 타이포, 대형 도형 그래픽 무드를 전체 핵심 화면에 일괄 적용한 프리뷰입니다.</p>
       </section>
 
-      <section class="card">
-        <h2>하단 네비게이션</h2>
-        <ul>
-          <li>홈</li>
-          <li>채팅</li>
-          <li>주변 코인노래방</li>
-          <li>마이페이지</li>
-        </ul>
-      </section>
+      <section class="screens">
+        <article class="phone short">
+          <div class="shape star" style="top:84px; right:20px;"></div>
+          <div class="shape circle" style="width:150px;height:150px; top:120px; left:-20px;"></div>
+          <div class="shape tri" style="top:110px; right:92px; transform:rotate(-16deg);"></div>
+          <div class="content">
+            <div class="screen-label">LOGIN / SIGNUP</div>
+            <div class="status"><span>9:41</span><span>●●●</span></div>
+            <div class="big-title">sing<br/>in now</div>
+            <p class="subtext">하나의 화면에서 로그인과 회원가입을 전환합니다.</p>
+            <div class="card login-card">
+              <div class="auth-toggle"><div class="on">로그인</div><div class="off">회원가입</div></div>
+              <div class="social">카카오로 시작하기</div>
+              <div class="social">Apple로 시작하기</div>
+              <div class="field">휴대폰 번호</div>
+              <div class="field">비밀번호</div>
+              <div class="field">닉네임 / 지역 / MBTI</div>
+              <div class="field">15초 미리듣기 업로드</div>
+              <div class="submit">시작하기</div>
+            </div>
+          </div>
+        </article>
 
-      <section class="card">
-        <h2>0. 로그인 / 회원가입</h2>
-        <ul>
-          <li>한 화면 안에서 로그인 / 회원가입 전환</li>
-          <li>소셜 로그인 + ID/PW 로그인</li>
-          <li>휴대폰 번호, 인증번호, 비밀번호, 닉네임</li>
-          <li>성별, 나이, 지역, 프로필 사진, MBTI, 좋아하는 노래 장르</li>
-          <li>15초 미리듣기 등록 포함</li>
-        </ul>
-      </section>
+        <article class="phone">
+          <div class="shape star" style="top:74px; right:-6px;"></div>
+          <div class="shape blob" style="top:142px; left:-38px;"></div>
+          <div class="shape tri" style="top:108px; right:70px; transform: rotate(-18deg);"></div>
+          <div class="shape circle" style="top:208px; right:24px; width:170px; height:170px;"></div>
+          <div class="shape tri" style="bottom:72px; left:-12px; transform: rotate(18deg); border-bottom-color:#ff4e7a;"></div>
+          <div class="shape circle" style="bottom:34px; left:56px; width:138px; height:138px;"></div>
+          <div class="shape squiggle" style="bottom:70px; right:-16px; transform: rotate(16deg);"></div>
+          <div class="content">
+            <div class="screen-label">HOME</div>
+            <div class="status"><span>9:41</span><span>●●●</span></div>
+            <div class="big-title">sing<br/>together</div>
+            <p class="subtext">Find your next karaoke partner with a 15-sec vibe check.</p>
+            <section class="card" style="margin-top:158px;">
+              <div class="photos"><div class="photo left"></div><div class="photo right"></div></div>
+              <h1 class="title">It’s a <span>sing match!</span></h1>
+              <p class="subtitle">You and 수진 liked each other. Listen, match, or battle.</p>
+              <div class="panel">
+                <div class="row"><div><h2>수진, 27</h2><div class="meta">성수 · 1.2km · ENFP</div></div><div class="meta">발라드 러버</div></div>
+                <div class="chips"><span class="chip">OST</span><span class="chip">감성 발라드</span><span class="chip">듀엣 선호</span></div>
+                <div class="preview"><div><strong>15초 미리듣기</strong><span>끝까지 들으면 오늘 싱코인 +1, 최대 3개</span></div><button class="play">▶</button></div>
+                <div class="actions"><button class="pass">✕</button><button class="mate">싱메이트</button><button class="battle">싱배틀</button></div>
+              </div>
+            </section>
+          </div>
+          <nav class="nav"><button class="active"><span>⌂</span><span>홈</span></button><button><span>💬</span><span>채팅</span></button><button><span>📍</span><span>코노</span></button><button><span>👤</span><span>마이</span></button></nav>
+        </article>
 
-      <section class="card">
-        <h2>1. 홈 화면</h2>
-        <p>Singmate의 핵심 메인 화면입니다. 스와이프 카드 구조 안에 15초 미리듣기와 싱메이트/싱배틀 신청이 바로 들어갑니다.</p>
-        <pre>프로필 사진
-이름 / 나이 / 지역
-MBTI / 좋아하는 장르
-[▶ 15초 미리듣기]
-[싱메이트] [싱배틀]</pre>
-        <h3>추가 기능</h3>
-        <ul>
-          <li>다른 사람 프로필의 15초 미리듣기를 끝까지 들으면 싱코인 1개 지급</li>
-          <li>하루 최대 3개까지만 지급</li>
-          <li>3개 이후에도 미리듣기는 계속 가능</li>
-        </ul>
-      </section>
+        <article class="phone short">
+          <div class="shape circle" style="top:90px; left:-30px; width:120px; height:120px;"></div>
+          <div class="shape tri" style="top:110px; right:18px; transform:rotate(12deg);"></div>
+          <div class="shape blob" style="bottom:140px; right:-26px;"></div>
+          <div class="content">
+            <div class="screen-label">CHAT + BATTLE RESULT</div>
+            <div class="status"><span>9:41</span><span>●●●</span></div>
+            <div class="chat-header">
+              <div class="row"><div><h3 style="font-size:28px;">민지</h3><div class="meta">싱배틀 진행 중</div></div><div class="chip">online</div></div>
+            </div>
+            <div class="bubble-wrap">
+              <div class="bubble you">오늘 저녁 성수 쪽 코노에서 배틀 가능하세요?</div>
+              <div class="bubble me">좋아요. 수노래방 성수점으로 갈까요?</div>
+              <div class="bubble you">좋아요. 끝나고 바로 결과 선택해요.</div>
+            </div>
+            <div class="inputbar"><div>메시지 입력...</div><button>➤</button></div>
+            <div class="battle-card">
+              <div class="row"><h3 style="font-size:24px;">싱배틀 결과</h3><span class="chip">즉시 확정</span></div>
+              <div class="battle-options">
+                <button class="battle-btn primary">내가 이겼어요</button>
+                <button class="battle-btn">상대가 이겼어요</button>
+                <button class="battle-btn">무승부</button>
+              </div>
+            </div>
+          </div>
+          <nav class="nav"><button><span>⌂</span><span>홈</span></button><button class="active"><span>💬</span><span>채팅</span></button><button><span>📍</span><span>코노</span></button><button><span>👤</span><span>마이</span></button></nav>
+        </article>
 
-      <section class="card">
-        <h2>2. 채팅</h2>
-        <ul>
-          <li>매칭 후 대화</li>
-          <li>시간 조율</li>
-          <li>코인노래방 장소 조율</li>
-          <li>카카오톡처럼 익숙한 채팅 UI</li>
-        </ul>
-        <h3>싱배틀 결과 입력</h3>
-        <ul>
-          <li>내가 이겼어요</li>
-          <li>상대가 이겼어요</li>
-          <li>무승부</li>
-        </ul>
-      </section>
+        <article class="phone short">
+          <div class="shape star" style="top:84px; left:-20px;"></div>
+          <div class="shape tri" style="top:100px; right:24px; transform:rotate(-12deg);"></div>
+          <div class="shape circle" style="bottom:120px; right:-18px; width:130px; height:130px;"></div>
+          <div class="content">
+            <div class="screen-label">NEARBY KARAOKE</div>
+            <div class="status"><span>9:41</span><span>●●●</span></div>
+            <div class="big-title">sing<br/>nearby</div>
+            <p class="subtext">현재 위치 기준으로 가까운 코인노래방을 찾고 채팅으로 바로 공유합니다.</p>
+            <div class="map-card">
+              <div class="map-box"><div class="pin p1"></div><div class="pin p2"></div><div class="pin p3"></div></div>
+              <div class="location-item">
+                <h3>수노래방 성수점</h3>
+                <div class="meta">320m · 도보 5분</div>
+                <div class="list-actions"><button class="list-btn">상세보기</button><button class="list-btn share">채팅으로 공유</button></div>
+              </div>
+              <div class="location-item">
+                <h3>코인싱 성수역점</h3>
+                <div class="meta">540m · 도보 8분</div>
+                <div class="list-actions"><button class="list-btn">상세보기</button><button class="list-btn share">채팅으로 공유</button></div>
+              </div>
+            </div>
+          </div>
+          <nav class="nav"><button><span>⌂</span><span>홈</span></button><button><span>💬</span><span>채팅</span></button><button class="active"><span>📍</span><span>코노</span></button><button><span>👤</span><span>마이</span></button></nav>
+        </article>
 
-      <section class="card">
-        <h2>3. 주변 코인노래방</h2>
-        <ul>
-          <li>현재 위치 기반 리스트/지도</li>
-          <li>매장명 / 거리 / 이동 시간 / 상세보기</li>
-          <li>특정 코인노래방을 채팅창에 바로 공유 가능</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>4. 마이페이지</h2>
-        <ul>
-          <li>내 프로필 관리</li>
-          <li>15초 미리듣기 관리</li>
-          <li>신청/매칭 관리</li>
-          <li>싱코인 관리</li>
-          <li>배틀 기록 확인</li>
-          <li>설정</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>메인 플로우</h2>
-        <p>로그인/회원가입 → 프로필 생성 → 15초 미리듣기 등록 → 홈 스와이프 카드 → 싱메이트/싱배틀 신청 → 채팅 → 주변 코인노래방 공유/조율 → 마이페이지에서 기록/코인 관리</p>
+        <article class="phone">
+          <div class="shape blob" style="top:92px; right:-22px;"></div>
+          <div class="shape circle" style="top:170px; left:-16px; width:120px; height:120px;"></div>
+          <div class="shape squiggle" style="bottom:120px; left:-8px; transform:rotate(-14deg);"></div>
+          <div class="content">
+            <div class="screen-label">MY PAGE</div>
+            <div class="status"><span>9:41</span><span>●●●</span></div>
+            <div class="big-title">my<br/>rhythm</div>
+            <p class="subtext">내 프로필, 15초 미리듣기, 싱코인, 배틀 기록을 한 곳에서 관리합니다.</p>
+            <div class="mypage-card">
+              <div class="profile-top"><div class="avatar"></div><h3 style="font-size:28px; margin:0;">수진, 27</h3><div class="meta">성수 · ENFP · 발라드 / OST</div></div>
+              <div class="mypage-item"><h3>15초 미리듣기</h3><div class="preview" style="margin:10px 0 0;"><div><strong>현재 등록된 음성</strong><span>재생 · 다시 녹음 · 파일 재업로드</span></div><button class="play">▶</button></div></div>
+              <div class="coin-box"><strong>싱코인 28개</strong><div style="margin-top:6px; font-size:14px;">오늘 미리듣기 보상 2/3 지급 완료</div><button class="coin-btn">충전하기 / 사용내역</button></div>
+              <div class="mypage-item"><h3>신청 / 매칭 관리</h3><div class="meta">보낸 싱메이트, 받은 싱배틀, 매칭 완료 내역</div></div>
+              <div class="mypage-item"><h3>배틀 기록</h3><div class="meta">총 21전 · 14승 · 승률 66% · 우리동네 랭킹 3위</div></div>
+              <div class="mypage-item"><h3>설정</h3><div class="meta">알림, 계정 관리, 로그아웃, 회원탈퇴</div></div>
+            </div>
+          </div>
+          <nav class="nav"><button><span>⌂</span><span>홈</span></button><button><span>💬</span><span>채팅</span></button><button><span>📍</span><span>코노</span></button><button class="active"><span>👤</span><span>마이</span></button></nav>
+        </article>
       </section>
     </div>
   </body>
