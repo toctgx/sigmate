@@ -186,13 +186,15 @@
       .nav button span:first-child { font-size: 22px; line-height: 1; }
       .nav .active { color: #d7ff63; }
       .login-card { margin-top: 200px; }
-      .auth-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
-      .auth-toggle div, .field, .social { border-radius: 999px; padding: 14px 16px; }
-      .auth-toggle .on { background: #d7ff63; color: #4c2a99; font-weight: 800; }
-      .auth-toggle .off { background: rgba(255,255,255,0.1); }
+      .field, .social { border-radius: 999px; padding: 14px 16px; }
       .social { background: #fff; color: #4c2a99; font-weight: 800; margin-bottom: 10px; text-align: center; }
       .field { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.92); margin-bottom: 10px; }
       .submit { background: #ff4e7a; color: #fff; text-align: center; border-radius: 999px; padding: 16px; font-weight: 800; margin-top: 8px; }
+      .flow-card { margin-top: 18px; background: rgba(255,255,255,0.08); border-radius: 24px; padding: 16px; }
+      .flow-card h3 { margin: 0 0 12px; font-size: 18px; }
+      .flow-list { display: grid; gap: 10px; }
+      .flow-item { background: rgba(0,0,0,0.18); border-radius: 18px; padding: 12px 14px; font-size: 14px; line-height: 1.45; }
+      .flow-item strong { color: #d7ff63; display: block; margin-bottom: 4px; }
     </style>
   </head>
   <body>
@@ -211,14 +213,23 @@
           <div class="content">
             <div class="status"><span>9:41</span><span>●●●</span></div>
             <div class="card login-card">
-              <div class="auth-toggle"><div class="on">로그인</div><div class="off">회원가입</div></div>
-              <div class="social">카카오로 시작하기</div>
-              <div class="social">Apple로 시작하기</div>
+              <div class="social">카카오로 로그인</div>
+              <div class="social">Apple로 로그인</div>
               <div class="field">휴대폰 번호</div>
-              <div class="field">비밀번호</div>
-              <div class="field">닉네임 / 지역 / MBTI</div>
-              <div class="field">15초 미리듣기 업로드</div>
-              <div class="submit">시작하기</div>
+              <div class="field">인증번호</div>
+              <div class="field">위치 권한 허용</div>
+              <div class="submit">로그인</div>
+            </div>
+            <div class="flow-card">
+              <h3>회원가입 플로우</h3>
+              <div class="flow-list">
+                <div class="flow-item"><strong>STEP 1</strong>휴대폰 번호 입력 → 인증번호 확인 → 위치 권한 허용</div>
+                <div class="flow-item"><strong>STEP 2</strong>이름 / 생년월일 / 성별 입력</div>
+                <div class="flow-item"><strong>STEP 3</strong>노래 취향, 선호 장르, 관심사 선택</div>
+                <div class="flow-item"><strong>STEP 4</strong>MBTI 또는 성향 테스트 선택</div>
+                <div class="flow-item"><strong>STEP 5</strong>프로필 사진 등록 + 15초 미리듣기 업로드</div>
+                <div class="flow-item"><strong>STEP 6</strong>가입 완료 후 홈 스와이프 카드 진입</div>
+              </div>
             </div>
           </div>
         </article>
