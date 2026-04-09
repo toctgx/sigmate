@@ -76,6 +76,39 @@
         box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
         backdrop-filter: blur(8px);
       }
+      .home-card {
+        min-height: 650px;
+        background: linear-gradient(180deg, rgba(34,18,76,0.04) 0%, rgba(34,18,76,0.08) 100%), url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80') center/cover;
+        border-radius: 34px;
+        overflow: hidden;
+        padding: 18px;
+        position: relative;
+        box-shadow: 0 24px 40px rgba(0,0,0,0.22);
+      }
+      .home-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(35,18,79,0.02) 0%, rgba(35,18,79,0.14) 35%, rgba(35,18,79,0.85) 100%);
+      }
+      .home-overlay { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; }
+      .top-meter { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      .meter-lines { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1; }
+      .meter-lines span { display: block; height: 6px; border-radius: 999px; background: rgba(215,255,99,0.35); }
+      .meter-lines span:first-child { background: #d7ff63; }
+      .rate-badge { background: #d7ff63; color: #432081; border-radius: 999px; min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; gap: 8px; font-weight: 800; }
+      .heart-mini { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #432081; display: grid; place-items: center; font-size: 12px; }
+      .home-spacer { flex: 1; }
+      .home-info h2 { margin: 0 0 10px; font-size: 34px; letter-spacing: -0.06em; }
+      .distance { display: flex; align-items: center; gap: 8px; font-size: 15px; color: rgba(255,255,255,0.86); }
+      .home-meta { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 14px; }
+      .home-meta .chip { background: rgba(255,255,255,0.16); }
+      .home-actions { display: grid; grid-template-columns: 70px 1fr 70px; gap: 14px; align-items: center; margin-top: 14px; }
+      .round-btn { width: 70px; height: 70px; border-radius: 50%; border: none; font-size: 30px; font-weight: 800; }
+      .round-btn.pass { background: #4a2695; color: #fff; }
+      .round-btn.like { background: #ff4e7a; color: #fff; }
+      .round-btn.play-main { width: 96px; height: 96px; justify-self: center; background: #d7ff63; color: #432081; box-shadow: 0 0 0 8px rgba(215,255,99,0.18); }
+      .home-caption { margin-top: 12px; color: rgba(255,255,255,0.88); font-size: 13px; text-align: center; }
       .title { font-size: 24px; line-height: 1.05; text-align: center; letter-spacing: -0.06em; font-weight: 700; margin: 0 0 8px; }
       .title span { color: #d7ff63; }
       .subtitle { text-align: center; color: rgba(255,255,255,0.82); margin: 0 0 16px; font-size: 15px; }
@@ -200,12 +233,24 @@
           <div class="shape squiggle" style="bottom:70px; right:-16px; transform: rotate(16deg);"></div>
           <div class="content">
             <div class="status"><span>9:41</span><span>●●●</span></div>
-            <section class="card" style="margin-top:158px; padding-top:22px;">
-              <div class="panel">
-                <div class="row"><div><h2>수진, 27</h2><div class="meta" style="color:rgba(255,255,255,0.88);">성수 · 1.2km · ENFP</div></div><div class="meta" style="color:rgba(255,255,255,0.9);">발라드 러버</div></div>
-                <div class="chips"><span class="chip">OST</span><span class="chip">감성 발라드</span><span class="chip">듀엣 선호</span></div>
-                <div class="preview"><div><strong>15초 미리듣기</strong><span>끝까지 들으면 오늘 싱코인 +1, 최대 3개</span></div><button class="play">▶</button></div>
-                <div class="actions"><button class="pass">✕</button><button class="mate">싱메이트</button><button class="battle">싱배틀</button></div>
+            <section class="home-card" style="margin-top:158px;">
+              <div class="home-overlay">
+                <div class="top-meter">
+                  <div class="meter-lines"><span></span><span></span></div>
+                  <div class="rate-badge"><span class="heart-mini">♡</span>94%</div>
+                </div>
+                <div class="home-spacer"></div>
+                <div class="home-info">
+                  <h2>수진, 27</h2>
+                  <div class="distance">📍 성수 · 1.2km away</div>
+                  <div class="home-meta"><span class="chip">ENFP</span><span class="chip">OST</span><span class="chip">감성 발라드</span></div>
+                  <div class="home-actions">
+                    <button class="round-btn pass">✕</button>
+                    <button class="round-btn play-main">❚❚</button>
+                    <button class="round-btn like">♡</button>
+                  </div>
+                  <div class="home-caption">가운데 버튼은 15초 미리듣기, 좌우 액션 후 프로필을 옆으로 넘기는 구조입니다.</div>
+                </div>
               </div>
             </section>
           </div>
